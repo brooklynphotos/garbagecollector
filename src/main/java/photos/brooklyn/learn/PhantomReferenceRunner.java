@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PhantomReferenceRunner {
     public static void main(String[] args) {
-        final ReferenceQueue<Person> queue = new ReferenceQueue();
+        final ReferenceQueue<Person> queue = new ReferenceQueue<>();
         final List<FinalizePerson> phantomList = new ArrayList<>();
         List<Person> people = new ArrayList<>();
         // populate the lists
@@ -23,9 +23,7 @@ public class PhantomReferenceRunner {
         System.gc();
 
         // now see if the reference queue got filled up
-        phantomList.forEach(p->{
-            System.out.println(p.isEnqueued());
-        });
+        phantomList.forEach(p-> System.out.println(p.isEnqueued()));
         // call the clean up on each item of the queue
         Reference<? extends Person> referenceFromQueue;
         while((referenceFromQueue=queue.poll()) != null){
